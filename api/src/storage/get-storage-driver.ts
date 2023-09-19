@@ -7,6 +7,7 @@ export const _aliasMap: Record<string, string> = {
 	gcs: '@directus/storage-driver-gcs',
 	azure: '@directus/storage-driver-azure',
 	cloudinary: '@directus/storage-driver-cloudinary',
+	tencent: '@directus/storage-driver-tencent'
 };
 
 export const getStorageDriver = async (driverName: string): Promise<typeof Driver> => {
