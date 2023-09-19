@@ -2,6 +2,8 @@
 	"name": "directus-monorepo",
 	"private": true,
 	"scripts": {
+		"dev:api": "pnpm --filter api dev",
+		"dev:app": "pnpm --filter app run dev",
 		"build": "pnpm --recursive --filter '!docs' run build",
 		"format": "prettier --cache --check .",
 		"lint": "eslint --cache .",
