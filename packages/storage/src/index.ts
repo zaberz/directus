@@ -12,7 +12,7 @@ export class StorageManager {
 		const driverName = config.driver;
 
 		const Driver = this.drivers.get(driverName);
-
+		console.log(Driver);
 		if (!Driver) {
 			throw new Error(`Driver "${driverName}" isn't registered.`);
 		}
