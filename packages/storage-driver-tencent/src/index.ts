@@ -1,148 +1,160 @@
-import type { Driver, Range } from '@directus/storage';
-import { createReadStream, createWriteStream } from 'node:fs';
-import { access, copyFile, mkdir, opendir, rename, stat, unlink } from 'node:fs/promises';
-import { dirname, join, relative, resolve, sep } from 'node:path';
-import type { Readable } from 'node:stream';
-import { pipeline } from 'node:stream/promises';
+import type {Driver, Range} from '@directus/storage';
+import {join} from 'node:path';
+import {Readable} from 'node:stream';
 import COS from 'cos-nodejs-sdk-v5'
+import {normalizePath} from "@directus/utils";
 
 export type DriverTencentConfig = {
-	root: string;
-	secretId: string,
-	secretKey: string,
-	bucket: string;
-	region: string;
-	endPoint: string
+  root: string;
+  secretId: string,
+  secretKey: string,
+  bucket: string;
+  region: string;
+  endPoint: string
 };
 
 export class DriverTencent implements Driver {
-	private root: string;
-	private config: DriverTencentConfig;
-	private client: COS;
-	private bucket: string
-	private region: string
-	constructor(config: DriverTencentConfig) {
-		this.config = config;
+  private root: string;
+  private config: DriverTencentConfig;
+  private client: COS;
+  private bucket: string
+  private region: string
 
-		this.root = resolve(config.root);
-		this.client = this.getClient();
-		this.bucket = config.bucket
-		this.region = config.region
-	}
+  constructor(config: DriverTencentConfig) {
+    this.config = config;
 
-	private getClient() {
-		return new COS({
-			SecretId: this.config.secretId,
-			SecretKey: this.config.secretKey,
-		})
-	}
+    this.root = this.config.root ? normalizePath(this.config.root, { removeLeading: true }) : '';
+    this.client = this.getClient();
+    this.bucket = config.bucket
+    this.region = config.region
+  }
 
-	private fullPath(filepath: string) {
-		return join(this.root, join(sep, filepath));
-	}
+  private getClient() {
+    return new COS({
+      SecretId: this.config.secretId,
+      SecretKey: this.config.secretKey,
+    })
+  }
 
-	/**
-	 * Ensures that the directory exists. If it doesn't, it's created.
-	 */
-	private async ensureDir(dirpath: string) {
-		await mkdir(dirpath, { recursive: true });
-	}
+  private fullPath(filepath: string) {
+    return normalizePath(join(this.root, filepath));
+  }
 
-	async read(filepath: string, range?: Range) {
-		const options: Parameters<typeof createReadStream>[1] = {};
+  async read(filepath: string, range?: Range) {
+    const options: any = {
+      Bucket: this.bucket,
+      Region: this.region,
+      Key: this.fullPath(filepath)
+    }
 
-		if (range?.start) {
-			options.start = range.start;
-		}
+    if (range) {
+      options.Range = `bytes=${range.start ?? ''}-${range.end ?? ''}`;
+    }
 
-		if (range?.end) {
-			options.end = range.end;
-		}
+    const res = await this.client.getObject(options)
+    return Readable.from(res.Body);
+  }
 
-		return createReadStream(this.fullPath(filepath), options);
-	}
+  async stat(filepath: string) {
+    const statRes = await this.client.headObject({
+      Bucket: this.bucket,
+      Region: this.region,
+      Key: this.fullPath(filepath)
+    })
 
-	async stat(filepath: string) {
-		const statRes = await stat(this.fullPath(filepath));
+    if (!statRes) {
+      throw new Error(`File "${filepath}" doesn't exist.`);
+    }
 
-		if (!statRes) {
-			throw new Error(`File "${filepath}" doesn't exist.`);
-		}
+    return {
+      size: statRes.headers?.['content-length'],
+      modified: statRes.headers?.['last-modified'],
+    };
+  }
 
-		return {
-			size: statRes.size,
-			modified: statRes.mtime,
-		};
-	}
+  async exists(filepath: string) {
+    try {
+      await this.stat(filepath);
+      return true;
+    } catch {
+      return false;
+    }
+  }
 
-	async exists(filepath: string) {
-		return access(this.fullPath(filepath))
-			.then(() => true)
-			.catch(() => false);
-	}
+  async move(src: string, dest: string) {
+    await this.copy(src, dest);
+    await this.delete(src);
+  }
 
-	async move(src: string, dest: string) {
-		const fullSrc = this.fullPath(src);
-		const fullDest = this.fullPath(dest);
-		await this.ensureDir(dirname(fullDest));
-		await rename(fullSrc, fullDest);
-	}
+  async copy(src: string, dest: string) {
+    const fullSrc = this.fullPath(src);
+    const fullDest = this.fullPath(dest);
 
-	async copy(src: string, dest: string) {
-		const fullSrc = this.fullPath(src);
-		const fullDest = this.fullPath(dest);
-		await this.ensureDir(dirname(fullDest));
-		await copyFile(fullSrc, fullDest);
-	}
+    await this.client.putObjectCopy({
+      Bucket: this.bucket,
+      Region: this.region,
+      Key: fullDest,
+      CopySource: fullSrc
+    })
+  }
 
-	async write(filepath: string, content: Readable) {
-		const fullPath = this.fullPath(filepath);
+  async write(filepath: string, content: Readable) {
+    const fullPath = this.fullPath(filepath);
 
-		let cos = new COS({
-			SecretId: this.config.secretId,
-			SecretKey: this.config.secretKey
-		})
-		await cos.putObject({
-			Bucket: this.bucket,
-			Region: this.region,
-			Key: filepath,
-			Body: content
-		})
-		//
-		// await this.ensureDir(dirname(fullPath));
-		// const writeStream = createWriteStream(fullPath);
-		// await pipeline(content, writeStream);
-	}
+    await this.client.putObject({
+      Bucket: this.bucket,
+      Region: this.region,
+      Key: fullPath,
+      Body: content
+    })
+  }
 
-	async delete(filepath: string) {
-		const fullPath = this.fullPath(filepath);
-		await unlink(fullPath);
-	}
+  async delete(filepath: string) {
+    const fullPath = this.fullPath(filepath);
 
-	list(prefix = '') {
-		const fullPrefix = this.fullPath(prefix);
-		return this.listGenerator(fullPrefix);
-	}
+    await this.client.deleteObject({
+      Bucket: this.bucket,
+      Region: this.region,
+      Key: fullPath,
+    })
+  }
 
-	private async *listGenerator(prefix: string): AsyncGenerator<string> {
-		const prefixDirectory = prefix.endsWith(sep) ? prefix : dirname(prefix);
+  async *list(prefix = '') {
+    const fullPrefix = this.fullPath(prefix);
 
-		const directory = await opendir(prefixDirectory);
+    const fileList = await  this.client.getBucket({
+      Bucket: this.bucket,
+      Region: this.region,
+      Prefix: fullPrefix,
+      Delimiter: '/'
+    })
 
-		for await (const file of directory) {
-			const fileName = join(prefixDirectory, file.name);
+    for (const file of fileList.Contents) {
+      if (file.Key) {
+        yield file.Key.substring(this.root.length);
+      }
+    }
+  }
 
-			if (fileName.toLowerCase().startsWith(prefix.toLowerCase()) === false) continue;
-
-			if (file.isFile()) {
-				yield relative(this.root, fileName);
-			}
-
-			if (file.isDirectory()) {
-				yield* this.listGenerator(join(fileName, sep));
-			}
-		}
-	}
+  // private async* listGenerator(prefix: string): AsyncGenerator<string> {
+  //   const prefixDirectory = prefix.endsWith(sep) ? prefix : dirname(prefix);
+  //
+  //   const directory = await opendir(prefixDirectory);
+  //
+  //   for await (const file of directory) {
+  //     const fileName = join(prefixDirectory, file.name);
+  //
+  //     if (fileName.toLowerCase().startsWith(prefix.toLowerCase()) === false) continue;
+  //
+  //     if (file.isFile()) {
+  //       yield relative(this.root, fileName);
+  //     }
+  //
+  //     if (file.isDirectory()) {
+  //       yield* this.listGenerator(join(fileName, sep));
+  //     }
+  //   }
+  // }
 }
 
 export default DriverTencent;
