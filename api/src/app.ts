@@ -10,7 +10,7 @@ import path from 'path';
 import qs from 'qs';
 import { registerAuthProviders } from './auth.js';
 import activityRouter from './controllers/activity.js';
-import assetsRouter from './controllers/assets.js';
+// import assetsRouter from './controllers/assets.js';
 import authRouter from './controllers/auth.js';
 import collectionsRouter from './controllers/collections.js';
 import dashboardsRouter from './controllers/dashboards.js';
