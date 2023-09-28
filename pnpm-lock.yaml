@@ -1684,6 +1684,34 @@ importers:
         specifier: 0.31.1
         version: 0.31.1(happy-dom@9.18.3)(sass@1.62.1)
 
+  packages/storage-driver-tencent:
+    dependencies:
+      '@directus/storage':
+        specifier: workspace:*
+        version: link:../storage
+      '@directus/utils':
+        specifier: workspace:*
+        version: link:../utils
+      cos-nodejs-sdk-v5:
+        specifier: ^2.12.4
+        version: 2.12.4
+    devDependencies:
+      '@directus/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      '@ngneat/falso':
+        specifier: 6.4.0
+        version: 6.4.0
+      '@vitest/coverage-c8':
+        specifier: 0.31.1
+        version: 0.31.1(vitest@0.31.1)
+      typescript:
+        specifier: 5.0.4
+        version: 5.0.4
+      vitest:
+        specifier: 0.31.1
+        version: 0.31.1(happy-dom@9.18.3)(sass@1.62.1)
+
   packages/stores:
     dependencies:
       '@vueuse/core':
