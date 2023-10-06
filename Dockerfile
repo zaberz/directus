@@ -22,6 +22,7 @@ COPY package.json .
 RUN corepack enable && corepack prepare
 
 COPY pnpm-lock.yaml .
+COPY .npmrc .
 RUN pnpm fetch
 COPY . .
 RUN pnpm install --recursive --offline --frozen-lockfile
