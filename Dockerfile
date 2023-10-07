@@ -10,13 +10,17 @@ ARG TARGETPLATFORM
 
 ENV NODE_OPTIONS=--max-old-space-size=8192
 
+
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+RUN apk update
+
 RUN \
-  if [ "$TARGETPLATFORM" = 'linux/arm64' ]; then \
+#  if [ "$TARGETPLATFORM" = 'linux/arm64' ]; then \
   apk --no-cache add \
   python3 \
   build-base \
-  && ln -sf /usr/bin/python3 /usr/bin/python \
-  ; fi
+  && ln -sf /usr/bin/python3 /usr/bin/python
+#  ; fi
 
 COPY package.json .
 RUN corepack enable && corepack prepare
