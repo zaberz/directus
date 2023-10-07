@@ -1791,90 +1791,6 @@ importers:
         specifier: 0.31.1
         version: 0.31.1(happy-dom@9.18.3)(sass@1.62.1)
 
-  packages/storage-driver-tencent:
-    dependencies:
-      '@directus/storage':
-        specifier: workspace:*
-        version: link:../storage
-      '@directus/utils':
-        specifier: workspace:*
-        version: link:../utils
-      cos-nodejs-sdk-v5:
-        specifier: ^2.12.4
-        version: 2.12.4
-    devDependencies:
-      '@directus/tsconfig':
-        specifier: workspace:*
-        version: link:../tsconfig
-      '@ngneat/falso':
-        specifier: 6.4.0
-        version: 6.4.0
-      '@vitest/coverage-c8':
-        specifier: 0.31.1
-        version: 0.31.1(vitest@0.31.1)
-      typescript:
-        specifier: 5.0.4
-        version: 5.0.4
-      vitest:
-        specifier: 0.31.1
-        version: 0.31.1(happy-dom@9.18.3)(sass@1.62.1)
-
-  packages/storage-driver-tencent:
-    dependencies:
-      '@directus/storage':
-        specifier: workspace:*
-        version: link:../storage
-      '@directus/utils':
-        specifier: workspace:*
-        version: link:../utils
-      cos-nodejs-sdk-v5:
-        specifier: ^2.12.4
-        version: 2.12.4
-    devDependencies:
-      '@directus/tsconfig':
-        specifier: workspace:*
-        version: link:../tsconfig
-      '@ngneat/falso':
-        specifier: 6.4.0
-        version: 6.4.0
-      '@vitest/coverage-c8':
-        specifier: 0.31.1
-        version: 0.31.1(vitest@0.31.1)
-      typescript:
-        specifier: 5.0.4
-        version: 5.0.4
-      vitest:
-        specifier: 0.31.1
-        version: 0.31.1(happy-dom@9.18.3)(sass@1.62.1)
-
-  packages/storage-driver-tencent:
-    dependencies:
-      '@directus/storage':
-        specifier: workspace:*
-        version: link:../storage
-      '@directus/utils':
-        specifier: workspace:*
-        version: link:../utils
-      cos-nodejs-sdk-v5:
-        specifier: ^2.12.4
-        version: 2.12.4
-    devDependencies:
-      '@directus/tsconfig':
-        specifier: workspace:*
-        version: link:../tsconfig
-      '@ngneat/falso':
-        specifier: 6.4.0
-        version: 6.4.0
-      '@vitest/coverage-c8':
-        specifier: 0.31.1
-        version: 0.31.1(vitest@0.31.1)
-      typescript:
-        specifier: 5.0.4
-        version: 5.0.4
-      vitest:
-        specifier: 0.31.1
-        version: 0.31.1(happy-dom@9.18.3)(sass@1.62.1)
-
   packages/stores:
     dependencies:
       '@vueuse/core':
@@ -10372,6 +10288,11 @@ packages:
     resolution: {integrity: sha512-kNOjDqAh7px0XWNI+4QbzoiR/nTkHAWNud2uvnJquD1/x5a7EQZMJT0AczqK0Qn67oY/TTQ1LbUKajZpp3I9tQ==}
     engines: {node: '>=8.0.0'}
 
+  /atomically@1.7.0:
+    resolution: {integrity: sha512-Xcz9l0z7y9yQ9rdDaxlmaI4uJHf/T8g9hOEzJcsEqX2SjCj4J20uK7+ldkDHMbpJDK76wF7xEIgxc/vSlsfw5w==}
+    engines: {node: '>=10.12.0'}
+    dev: false
+
   /autocannon@7.12.0:
     resolution: {integrity: sha512-SZwtwykFZaoz5pKg7WY7gw1Dayqv9buXSjvc99sSzZIfguUc4FmFEFJr3INtfXJ7o9Xyn5bJM093wxipVV59ZA==}
     hasBin: true
@@ -10406,7 +10327,7 @@ packages:
     engines: {node: '>= 0.4'}
 
   /aws-sign2@0.7.0:
-    resolution: {integrity: sha1-tG6JCTSpWR8tL2+G1+ap8bP+dqg=}
+    resolution: {integrity: sha512-08kcGqnYf/YmjoRhfxyu+CLxBjUtHLXLXX/vUfx9l2LYzG3c1m61nrpyFUZI6zeS+Li/wWMMidD9KgrqtGq3mA==}
     requiresBuild: true
     dev: false
 
@@ -10544,7 +10465,7 @@ packages:
     dev: true
 
   /bcrypt-pbkdf@1.0.2:
-    resolution: {integrity: sha1-pDAdOJtqQ/m2f/PKEaP2Y342Dp4=}
+    resolution: {integrity: sha512-qeFIXtP4MSoi6NLqO12WfqARWWuCKi2Rn/9hJLEmtB5yTNr9DqFWkJRCf2qShWzPeAMRnOgCrq0sg/KLv5ES9w==}
     requiresBuild: true
     dependencies:
       tweetnacl: 0.14.5
@@ -10970,7 +10891,7 @@ packages:
     dev: true
 
   /caseless@0.12.0:
-    resolution: {integrity: sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=}
+    resolution: {integrity: sha512-4tYFyifaFfGacoiObjJegolkwSU4xQNGbVgUiNYVUxbQ2x2lUsFvY4hVgVzGiIe6WLOPqycWXA40l+PWsxthUw==}
     requiresBuild: true
     dev: false
 
@@ -11949,7 +11870,7 @@ packages:
     dev: true
 
   /dashdash@1.14.1:
-    resolution: {integrity: sha1-hTz6D3y+L+1d4gMmuN1YEDX24vA=}
+    resolution: {integrity: sha512-jRFi8UDGo6j+odZiEpjazZaWqEal3w/basFjQHQEwVtZJGDpxbH1MeYluwCS8Xq5wmLJooDlMgvVarmWfGM44g==}
     engines: {node: '>=0.10'}
     requiresBuild: true
     dependencies:
@@ -12136,6 +12057,7 @@ packages:
   /define-data-property@1.1.0:
     resolution: {integrity: sha512-UzGwzcjyv3OtAvolTj1GoyNYzfFR+iqbGjcnBEENZVCpM4/Ng1yhGNvS3lR/xDS74Tb2wGG9WzNSNIOS9UVb2g==}
     engines: {node: '>= 0.4'}
+    requiresBuild: true
     dependencies:
       get-intrinsic: 1.2.1
       gopd: 1.0.1
@@ -12439,7 +12361,7 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
 
   /ecc-jsbn@0.1.2:
-    resolution: {integrity: sha1-OoOpBOVDUyh4dMVkt1SThoSamMk=}
+    resolution: {integrity: sha512-eh9O+hwRHNbG4BLTjEl3nw044CkGm5X6LoaCf7LPp7UU8Qrt47JYNi6nPX8xjW97TKGKm1ouctg0QSpZe9qrnw==}
     requiresBuild: true
     dependencies:
       jsbn: 0.1.1
@@ -13136,7 +13058,7 @@ packages:
     dev: true
 
   /extsprintf@1.3.0:
-    resolution: {integrity: sha1-lpGEQOMEGnpBT4xS48V06zw+HgU=}
+    resolution: {integrity: sha512-11Ndz7Nv+mvAC1j0ktTa7fAb0vLyGGX+rMHNBYQviQDGU0Hw7lhctJANqbPhu9nV9/izT/IntTgZ7Im/9LJs9g==}
     engines: {'0': node >=0.6.0}
     requiresBuild: true
     dev: false
@@ -13489,7 +13411,7 @@ packages:
     dev: true
 
   /forever-agent@0.6.1:
-    resolution: {integrity: sha1-+8cfDEGt6zf5bFd60e1C2P2sypE=}
+    resolution: {integrity: sha512-j0KLYPhm6zeac4lz3oJ3o65qvgQCcPubiyotZrXqEaG4hNagNYO8qdlUrX5vwqv9ohqeT/Z3j6+yW067yWWdUw==}
     requiresBuild: true
     dev: false
 
@@ -13792,7 +13714,7 @@ packages:
     resolution: {integrity: sha512-5eDf9fuSXwxBL6q5HX+dhDj+dslFGWzU5thZ9kNKUkcPtaPdatmUFKwHFrLb/uf/WpA4BHET+AX3Scl56cAjpA==}
 
   /getpass@0.1.7:
-    resolution: {integrity: sha1-Xv+OPmhNVprkyysSgmBOi6YhSfo=}
+    resolution: {integrity: sha512-0fzj9JxOLfJ+XGLhR8ze3unN0KZCgZwiSSDz168VERjK8Wl8kVSdcu2kspd4s4wtAa1y/qrVRiAA0WclVsu0ng==}
     requiresBuild: true
     dependencies:
       assert-plus: 1.0.0
@@ -14135,7 +14057,7 @@ packages:
     dev: true
 
   /har-schema@2.0.0:
-    resolution: {integrity: sha1-qUwiJOvKwEeCoNkDVSHyRzW37JI=}
+    resolution: {integrity: sha512-Oqluz6zhGX8cyRaTQlFMPw80bSJVG2x/cFb8ZPhUILGgHka9SsokCCOQgpveePerqidZOrT14ipqfJb7ILcW5Q==}
     engines: {node: '>=4'}
     requiresBuild: true
     dev: false
@@ -14374,7 +14296,7 @@ packages:
       - supports-color
 
   /http-signature@1.2.0:
-    resolution: {integrity: sha1-muzZJRFHcvPZW2WmCruPfBj7rOE=}
+    resolution: {integrity: sha512-CAbnr6Rz4CYQkLYUtSNXxQPUH2gK8f3iWexVlsnMeD+GjlsQ0Xsy1cOX+mN3dtxYomRy21CiOzU8Uhw6OwncEQ==}
     engines: {node: '>=0.8', npm: '>=1.3.7'}
     requiresBuild: true
     dependencies:
@@ -14954,7 +14876,7 @@ packages:
       which-typed-array: 1.1.11
 
   /is-typedarray@1.0.0:
-    resolution: {integrity: sha1-5HnICFjfDBsR3dppQPlgEfzaSpo=}
+    resolution: {integrity: sha512-cyA56iCMHAh5CdzjJIa4aohJyeO1YbwLi3Jc35MmRU6poroFjIGZzUzupGiRPOjgHg9TLu43xbpwXk523fMxKA==}
     dev: false
 
   /is-unicode-supported@0.1.0:
@@ -15032,7 +14954,7 @@ packages:
     dev: true
 
   /isstream@0.1.2:
-    resolution: {integrity: sha1-R+Y/evVa+m+S4VAOaQ64uFKcCZo=}
+    resolution: {integrity: sha512-Yljz7ffyPbrLpLngrMtZ7NduUgVvi6wG9RJ9IUcyCd59YQ911PBJphODUcbOVbqYfxe1wuYf/LJ8PauMRwsM/g==}
     requiresBuild: true
     dev: false
 
@@ -15239,7 +15161,7 @@ packages:
     requiresBuild: true
 
   /jsbn@0.1.1:
-    resolution: {integrity: sha1-peZUwuWi3rXyAdls77yoDA7y9RM=}
+    resolution: {integrity: sha512-UVU9dibq2JcFWxQPA6KCqj5O42VOmAY3zQUfEKxU0KpTGXwNoCjkX1e13eHNvw/xPynt6pU0rZ1htjWTNTSXsg==}
     requiresBuild: true
     dev: false
 
@@ -15378,7 +15300,7 @@ packages:
     dev: true
 
   /json-stringify-safe@5.0.1:
-    resolution: {integrity: sha1-Epai1Y/UXxmg9s4B1lcB4sc1tus=}
+    resolution: {integrity: sha512-ZClg6AaYvamvYEE82d3Iyd3vSSIjQ+odgjaTzRuO3s7toCdFKczob2i0zCh7JE8kWn17yvAWhUVxvqGwUalsRA==}
     dev: false
 
   /json-to-graphql-query@2.2.5:
@@ -17914,7 +17836,7 @@ packages:
     dev: true
 
   /path-exists@3.0.0:
-    resolution: {integrity: sha1-zg6+ql94yxiSXqfYENe1mwEP1RU=}
+    resolution: {integrity: sha512-bpC7GYwiDYQ4wYLe+FA8lhRjhQCMcQGuSgGGqDkg/QerRWw9CmGRT0iSOVRSZJ29NMLZgIzqaljJ63oaL4NIJQ==}
     engines: {node: '>=4'}
 
   /path-exists@4.0.0:
@@ -18015,7 +17937,7 @@ packages:
     dev: true
 
   /performance-now@2.1.0:
-    resolution: {integrity: sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=}
+    resolution: {integrity: sha512-7EAHlyLHI56VEIdK57uwHdHKIaAGbnXPiw0yWbarQZOKaKpvUIgW0jWRVLiatnM+XXlSwsanIBH/hzGMJulMow==}
     requiresBuild: true
     dev: false
 
@@ -21659,7 +21581,7 @@ packages:
     dev: false
 
   /tweetnacl@0.14.5:
-    resolution: {integrity: sha1-WuaBd/GS1EViadEIr6k/+HQ/T2Q=}
+    resolution: {integrity: sha512-KXXFFdAbFXY4geFIwoyNK+f5Z1b7swfXABfL7HXCmoIWMKU3dmS26672A4EeQtDzLKy7SXmfBu51JolvEKwtGA==}
     requiresBuild: true
     dev: false
 
