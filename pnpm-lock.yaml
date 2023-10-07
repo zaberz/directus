@@ -1819,6 +1819,62 @@ importers:
         specifier: 0.31.1
         version: 0.31.1(happy-dom@9.18.3)(sass@1.62.1)
 
+  packages/storage-driver-tencent:
+    dependencies:
+      '@directus/storage':
+        specifier: workspace:*
+        version: link:../storage
+      '@directus/utils':
+        specifier: workspace:*
+        version: link:../utils
+      cos-nodejs-sdk-v5:
+        specifier: ^2.12.4
+        version: 2.12.4
+    devDependencies:
+      '@directus/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      '@ngneat/falso':
+        specifier: 6.4.0
+        version: 6.4.0
+      '@vitest/coverage-c8':
+        specifier: 0.31.1
+        version: 0.31.1(vitest@0.31.1)
+      typescript:
+        specifier: 5.0.4
+        version: 5.0.4
+      vitest:
+        specifier: 0.31.1
+        version: 0.31.1(happy-dom@9.18.3)(sass@1.62.1)
+
+  packages/storage-driver-tencent:
+    dependencies:
+      '@directus/storage':
+        specifier: workspace:*
+        version: link:../storage
+      '@directus/utils':
+        specifier: workspace:*
+        version: link:../utils
+      cos-nodejs-sdk-v5:
+        specifier: ^2.12.4
+        version: 2.12.4
+    devDependencies:
+      '@directus/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      '@ngneat/falso':
+        specifier: 6.4.0
+        version: 6.4.0
+      '@vitest/coverage-c8':
+        specifier: 0.31.1
+        version: 0.31.1(vitest@0.31.1)
+      typescript:
+        specifier: 5.0.4
+        version: 5.0.4
+      vitest:
+        specifier: 0.31.1
+        version: 0.31.1(happy-dom@9.18.3)(sass@1.62.1)
+
   packages/stores:
     dependencies:
       '@vueuse/core':
@@ -9927,15 +9983,6 @@ packages:
       fast-json-stable-stringify: 2.1.0
       json-schema-traverse: 0.4.1
       uri-js: 4.4.1
-
-  /ajv@7.2.4:
-    resolution: {integrity: sha512-nBeQgg/ZZA3u3SYxyaDvpvDtgZ/EZPF547ARgZBrG9Bhu1vKDwAIjtIf+sDtJUKa2zOcEbmRLBRSyMraS/Oy1A==}
-    dependencies:
-      fast-deep-equal: 3.1.3
-      json-schema-traverse: 1.0.0
-      require-from-string: 2.0.2
-      uri-js: 4.4.1
-    dev: false
 
   /ajv@7.2.4:
     resolution: {integrity: sha512-nBeQgg/ZZA3u3SYxyaDvpvDtgZ/EZPF547ARgZBrG9Bhu1vKDwAIjtIf+sDtJUKa2zOcEbmRLBRSyMraS/Oy1A==}
