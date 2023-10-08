@@ -8,13 +8,3 @@ services:
       - ./database:/directus/database
       - ./uploads:/directus/uploads
     environment:
-      KEY: "f41cbb1d-d990-47df-8310-43d57c329577"
-      SECRET: "KwsRq1MyLDi-AwGa-a2Cb88DrtWXjQdQ"
-      ADMIN_EMAIL: '274588107@qq.com'
-      ADMIN_PASSWORD: 'zj9303!@#'
-      DB_CLIENT: 'mysql'
-      DB_HOST: "ljtc.ruaaaa.com"
-      DB_PORT: "13306"
-      DB_DATABASE: "ficus"
-      DB_USER: "root"
-      DB_PASSWORD: "zj9303!@#"
