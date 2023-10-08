@@ -384,7 +384,7 @@ export class ExtensionManager {
 				const operationPath = path.resolve(operation.path, operation.entrypoint.api!);
 
 				const operationInstance: OperationApiConfig | { default: OperationApiConfig } = await import(
-					`../${pathToRelativeUrl(operationPath, __dirname)}?t=${Date.now()}`
+					`./${pathToRelativeUrl(operationPath, __dirname)}?t=${Date.now()}`
 				);
 
 				const config = getModuleDefault(operationInstance);
