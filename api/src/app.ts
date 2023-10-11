@@ -127,32 +127,32 @@ export default async function createApp(): Promise<express.Application> {
 		);
 	}
 
-	app.use(
-		helmet.contentSecurityPolicy(
-			merge(
-				{
-					useDefaults: true,
-					// directives: {
-					// 	// Unsafe-eval is required for vue3 / vue-i18n / app extensions
-					// 	scriptSrc: ["'self'", "'unsafe-eval'"],
-					//
-					// 	// Even though this is recommended to have enabled, it breaks most local
-					// 	// installations. Making this opt-in rather than opt-out is a little more
-					// 	// friendly. Ref #10806
-					// 	upgradeInsecureRequests: null,
-					//
-					// 	// These are required for MapLibre
-					// 	workerSrc: ["'self'", 'blob:'],
-					// 	childSrc: ["'self'", 'blob:'],
-					// 	imgSrc: ["'self'", 'data:', 'blob:'],
-					// 	mediaSrc: ["'self'"],
-					// 	connectSrc: ["'self'", 'https://*'],
-					// },
-				},
-				getConfigFromEnv('CONTENT_SECURITY_POLICY_')
-			)
-		)
-	);
+	// app.use(
+	// 	helmet.contentSecurityPolicy(
+	// 		merge(
+	// 			{
+	// 				useDefaults: true,
+	// 				directives: {
+	// 					// Unsafe-eval is required for vue3 / vue-i18n / app extensions
+	// 					scriptSrc: ["'self'", "'unsafe-eval'"],
+	//
+	// 					// Even though this is recommended to have enabled, it breaks most local
+	// 					// installations. Making this opt-in rather than opt-out is a little more
+	// 					// friendly. Ref #10806
+	// 					upgradeInsecureRequests: null,
+	//
+	// 					// These are required for MapLibre
+	// 					workerSrc: ["'self'", 'blob:'],
+	// 					childSrc: ["'self'", 'blob:'],
+	// 					imgSrc: ["'self'", 'data:', 'blob:'],
+	// 					mediaSrc: ["'self'"],
+	// 					connectSrc: ["'self'", 'https://*'],
+	// 				},
+	// 			},
+	// 			getConfigFromEnv('CONTENT_SECURITY_POLICY_')
+	// 		)
+	// 	)
+	// );
 
 	if (env['HSTS_ENABLED']) {
 		app.use(helmet.hsts(getConfigFromEnv('HSTS_', ['HSTS_ENABLED'])));
