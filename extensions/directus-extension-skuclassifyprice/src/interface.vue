@@ -53,7 +53,7 @@ watch(v, (newVal) => {
   <v-input
       :model-value="value"
       label="price"
-      @update:modelValue="handleChange($event.target.value)"></v-input>
+      @update:modelValue="handleChange"></v-input>
 </template>
 
 <style scoped>
