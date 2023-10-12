@@ -111,7 +111,6 @@ describe('querying the driver', () => {
 		});
 
 		const query: AbstractQuery = {
-			root: true,
 			collection: randomCollection,
 			store: 'randomDataStore1',
 			fields: [
@@ -125,7 +124,7 @@ describe('querying the driver', () => {
 					alias: secondFieldAlias,
 				},
 				{
-					type: 'm2o',
+					type: 'nested-one',
 					fields: [
 						{
 							type: 'primitive',
@@ -137,14 +136,17 @@ describe('querying the driver', () => {
 							field: joinField2,
 						},
 					],
-					join: {
-						current: {
-							fields: [fk],
-						},
-						external: {
-							store: 'randomDataStore1',
-							collection: randomCollectionToJoin,
-							fields: [foreignPk],
+					meta: {
+						type: 'm2o',
+						join: {
+							current: {
+								fields: [fk],
+							},
+							external: {
+								store: 'randomDataStore1',
+								collection: randomCollectionToJoin,
+								fields: [foreignPk],
+							},
 						},
 					},
 					alias: joinAlias,
