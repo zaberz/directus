@@ -12,6 +12,7 @@ function handleChange(value) {
 }
 
 watch(() => v, (newVal) => {
+  console.log(v)
   if (newVal.order_sku_detail && newVal.order_sku_detail.create) {
     const totalPrice = newVal.order_sku_detail.create.reduce((acc, next) => {
       return acc + next.price

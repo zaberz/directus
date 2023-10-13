@@ -5,8 +5,13 @@ export default {
 			// res.send('Hello, World!')
 			const id = req.params['pk'].substring(0, 36);
 			const file = (await context.database.select('*').from('directus_files').where({ id }).first());
-			let path = file.filename_disk
-			res.redirect(301, 'http://directus-1255436385.cos.ap-guangzhou.myqcloud.com/ficus/'+path)
+
+			if (file) {
+				let path = file.filename_disk
+				res.redirect(301, 'http://directus-1255436385.cos.ap-guangzhou.myqcloud.com/ficus/'+path)
+			}else {
+				res.status(404).end()
+			}
 		});
 
 	}
