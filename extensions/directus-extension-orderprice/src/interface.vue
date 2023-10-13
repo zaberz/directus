@@ -11,14 +11,13 @@ function handleChange(value) {
   emit('input', value)
 }
 
-watch(() => v, (newVal) => {
-  console.log(v)
+watch(v, (newVal) => {
   if (newVal.order_sku_detail && newVal.order_sku_detail.create) {
     const totalPrice = newVal.order_sku_detail.create.reduce((acc, next) => {
-      return acc + next.price
+      return acc + parseFloat(next.price)
     }, 0)
 
-    if (totalPrice != v.total_price) {
+    if (totalPrice != newVal.total_price) {
       emit('input', totalPrice)
     }
   }
