@@ -1,7 +1,8 @@
 import knex from 'knex'
-import { v4 as uuid } from 'uuid';
+import {v4 as uuid} from 'uuid'
 
 let sourceDB, toDB
+
 function initDB() {
   sourceDB = knex({
     client: 'mysql',
@@ -16,14 +17,15 @@ function initDB() {
   toDB = knex({
     client: 'mysql',
     connection: {
-      host: 'ljtc.ruaaaa.com',
-      port: '13306',
-      user: 'root',
-      password: 'zj9303!@#',
+      host: 'mysql.ruaaaa.com',
+      port: '3306',
+      user: 'ficus',
+      password: '5Pxcdrp2cHLnSHdR',
       database: 'ficus'
     }
   })
 }
+
 /**
  * customer
  * */
@@ -31,7 +33,7 @@ async function customer() {
   let a = await sourceDB
     .select('*')
     .from('ficus_customer')
-    // .limit(1)
+  // .limit(1)
 
   // let sourceData = a[0]
   // console.log(sourceData)
@@ -53,7 +55,7 @@ async function customer() {
 async function sku() {
   let records = await sourceDB('ficus_sku').select('*')
   let res = await toDB('sku')
-    .insert(records.map(record=> {
+    .insert(records.map(record => {
       return {
         id: record.id,
         name: record.name,
@@ -66,7 +68,7 @@ async function sku() {
 async function skuClassifyPrice() {
   let records = await sourceDB('ficus_sku_classify').select('*')
   let res = await toDB('sku_classify_price')
-    .insert(records.map(record=> {
+    .insert(records.map(record => {
       return {
         sku: record.skuId,
         classify: record.classifyId,
@@ -78,6 +80,7 @@ async function skuClassifyPrice() {
 const userReflect = {
   // 10: '10522f2d-e348-4578-b2e5-8f3b30f78af9',
 }
+
 async function initUserReflect() {
   let records = await sourceDB('ficus_counselor')
     .select(['id', 'name'])
@@ -112,13 +115,11 @@ async function order() {
   shazhiList.forEach(item => {
     shazhiReflect[item.name] = item.id
   })
-  console.log(colorReflect)
-  console.log(shazhiReflect)
-  return
-  let lastID = 0
-  do {
 
-  }while (lastID)
+  let lastID = 0
+  // do {
+  //
+  // } while (lastID)
   let records = await sourceDB('ficus_order').select('*')
     .where('id', '>', lastID)
     .limit(1)
@@ -131,12 +132,12 @@ async function order() {
   console.log(details)
 
   let newID = await toDB('order')
-    .insert(records.map(record=> {
+    .insert(records.map(record => {
       return {
         id: uuid(),
         date_created: record.createAt,
         customerID: record.customerId,
-        user:  userReflect[record.counselorId],
+        user: userReflect[record.counselorId],
         pay_type: record.payType,
         remark: record.remark,
         real_price: record.realPrice,
@@ -145,10 +146,10 @@ async function order() {
     }), ['id'])
 
   await toDB('order_sku_detail')
-    .insert(details.map(detail=> {
+    .insert(details.map(detail => {
       return {
         date_created: detail.createAt,
-        classify: classifyReflect[ detail.classify],
+        classify: classifyReflect[detail.classify],
         color: classifyReflect[detail.color],
         shazhi: classifyReflect[detail.shazhi],
         order: newID,
@@ -156,6 +157,7 @@ async function order() {
         price: detail.price
       }
     }))
+
   await toDB('order_payment')
     .insert({
       date_created: record.createAt,
