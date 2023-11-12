@@ -8,7 +8,7 @@ export default {
 
 			if (file) {
 				let path = file.filename_disk
-				res.redirect(301, 'http://directus-1255436385.cos.ap-guangzhou.myqcloud.com/ficus/'+path)
+				res.redirect(301, `https://directus-1255436385.cos.ap-guangzhou.myqcloud.com/${process.env.STORAGE_TENCENT_ROOT}/`+path)
 			}else {
 				res.status(404).end()
 			}

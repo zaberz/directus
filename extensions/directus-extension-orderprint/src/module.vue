@@ -81,6 +81,7 @@ ${document.getElementById(id).innerHTML}
 <template>
   <private-view title="订单打印">
     <div>
+				<v-button @click="route.back()">返回</v-button>
       <v-button @click="savePDF">下载PDF</v-button>
       <v-button @click="printNow">直接打印</v-button>
       <div
@@ -108,7 +109,7 @@ ${document.getElementById(id).innerHTML}
           <div :style='{position: "absolute", top: "411px", left: "537px"}'>{{ printerData.customer?.phone }}</div>
           <div :style='{position: "absolute", top: "411px", left: "920px", whiteSpace: "nowrap"}'>{{
               format(new Date(
-                  printerData.date_updated), 'yyyy-MM-dd HH:mm')
+                  printerData.date_created), 'yyyy-MM-dd HH:mm')
             }}
           </div>
           <div :style='{position: "absolute", top: "462px", left: "175px"}'>{{ printerData?.customer?.address }}</div>
